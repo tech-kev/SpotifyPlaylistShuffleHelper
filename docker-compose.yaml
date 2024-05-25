@@ -1,0 +1,18 @@
+version: '3'
+services:
+  spotify-playlist-shuffle-helper:
+    image: techkev/spotifyplaylistshufflehelper:latest
+    container_name: spsh
+    ports:
+    - '8888:8888'
+    restart: always
+    volumes:
+    - '<path-to-logs-folder>/logs:/app/logs/'
+    - '<path-to-data-folder>/data:/app/data/'
+    - '/etc/localtime:/etc/localtime:ro'
+    environment:
+      CLIENT_ID: spotify_client_id
+      CLIENT_SECRET: spotify_client_secret
+      REDIRECT_URI: http://your-docker-ip:8888/callback
+      PLAYLIST_PAIRS: '[{"source_playlist_id": "1st_source_playlist_id", "target_playlist_id": "1st_target_playlist_id"}]'
+#      SLEEP_TIME: 20 # Optional
